@@ -54,47 +54,55 @@ var hash = {
     'm': 'www.mcdonalds.com.cn'
 }
 
-var hashInlocalStorage=JSON.parse(localStorage.getItem('zzz') || 'null')
+var hashInlocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
 // 取出 localStorage 中的 zzz 对应的 hash
-if(hashInlocalStorage){
-    hash=hashInlocalStorage
+if (hashInlocalStorage) {
+    hash = hashInlocalStorage
 }
 
 index = 0;
 while (index < keys['length']) {
     div1 = document.createElement('div')
-    a = mark1.appendChild(div1)
+    a = main1.appendChild(div1)
 
     index2 = 0;
     while (index2 < keys[index]['length']) {
+
+        span = document.createElement('span')
+        span.textContent = keys[index][index2]
+        span.className='text'
+
         kbd = document.createElement('kbd')//创建一个kbd//
         // b.textContent(keys[index][index2])
-        kbd.textContent=keys[index][index2];//kbd遍历//
-        button=document.createElement('button')//创建button//
-        button.textContent='编辑'//button上写字为e//
-        button.id=keys[index][index2]
-        button.onclick=function(xx){
-            key=xx['target']['id']
-            wangzhi=prompt('给我一个网址')
-            hash[key]=wangzhi
-            localStorage.setItem('zzz',JSON.stringify(hash))//把改变的hash存到本地//
+        // kbd.textContent=keys[index][index2];//kbd遍历//
+        button = document.createElement('button')//创建button//
+        button.textContent = '编辑'//button上写字为e//
+        button.id = keys[index][index2]
+        button.onclick = function (xx) {
+            key = xx['target']['id']
+            wangzhi = prompt('给我一个网址')
+            hash[key] = wangzhi
+            localStorage.setItem('zzz', JSON.stringify(hash))//把改变的hash存到本地//
             console.log(hash)
-        //    xx.target=keys[index][index2]
+            //    xx.target=keys[index][index2]
         }
+        kbd.appendChild(span)
+
         kbd.appendChild(button)//把button放到kbd里面//
         a.appendChild(kbd);//把kbd放到div里面//
+        a.className='row';
+        main1.appendChild(a)
 
         index2 = index2 + 1;
     }
     index = index + 1;
 }
 
-document.onkeypress=function(x){
-    x=x['key']
-    website=hash[x]
+document.onkeypress = function (x) {
+    x = x['key']
+    website = hash[x]
     // location.href='http://'+website /当前网站打开/
-    window.open('http://'+website, '_blank')  //在新窗口打开地址//
-
+    window.open('http://' + website, '_blank')  //在新窗口打开地址//
 }
 
 
