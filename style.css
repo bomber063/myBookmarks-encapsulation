@@ -38,7 +38,7 @@ kbd{
 }
 
 .wrapper{
-    background:red url(/wall.jpg) center/cover no-repeat;
+    background:red url(./wall.jpg) center/cover no-repeat;
     /* background-size: cover;   这里的cover可以简写成上面的center/cover,简写的时候需要放在background-position后面*/
     height: 100vh;
 }
