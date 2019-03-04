@@ -72,6 +72,23 @@ while (index < keys['length']) {
         span.textContent = keys[index][index2]
         span.className='text'
 
+        img=document.createElement('img')
+        img.className='picture'
+
+        if(hash[keys[index][index2]]){
+            img.src='http://'+hash[keys[index][index2]]+'/favicon.ico'
+        }
+//因为有字母没有部分没有给出网址，所以也需要判断是否有网址//
+        else{
+            img.src='http:'+'//i.loli.net/2017/11/10/5a05afbc5e183.png'
+        }
+//可以查询onerror了解用法//
+        img.onerror=function(e){
+            e.target.src='http:'+'//i.loli.net/2017/11/10/5a05afbc5e183.png'
+            return img
+        }
+        
+
         kbd = document.createElement('kbd')//创建一个kbd//
         // b.textContent(keys[index][index2])
         // kbd.textContent=keys[index][index2];//kbd遍历//
@@ -89,6 +106,8 @@ while (index < keys['length']) {
         kbd.appendChild(span)
 
         kbd.appendChild(button)//把button放到kbd里面//
+        kbd.appendChild(img)
+
         a.appendChild(kbd);//把kbd放到div里面//
         a.className='row';
         main1.appendChild(a)
