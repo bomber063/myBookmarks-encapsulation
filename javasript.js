@@ -1,23 +1,37 @@
+//封装的一点总结
+//封装就是先定义函数function 函数名字（变量名字）{ 函数具体运算内容 return 该封装函数等于的值},例如function xx(a){a=a+1 return a},这里xx就是封装的函数名字,a就是该封装函数的变量,经过a=a+1运算，最后把a赋值给function xx(a)
+//调用该封装函数的时候一般只需要把函数名字写出来，例如上面的只需要写xx（a）即可
+//如果是没有变量只有函数名字,例如function init(),调用就直接写函数名字即可
+//return 后面返回的值可以使单个值也可以是数组或者对象等哈希,例如可以return{'h':hh,'s':ss}
+
+
 
 //下面的意思
 //1、把ks返回给'k',然后通过init()['k']取到init()函数里面ks数组赋值给keys
 //2、把hh返回给'h',然后通过init()['h']取到init()函数里面hh数组赋值给hash
 
-//下面的是函数封装后初始化数据
+//下面的是函数封装后初始化数据 init()是没有变量的函数，直接使用函数名字即可
 var hashA = init()
 var keys = hashA['k']//['k']代表init()函数里面的reture的'k',这里的'k'不可以用k代替
 var hash = hashA['h']//['h']代表init()函数里面的reture的'h',这里的'h'不可以用h代替
 
-
+//封装函数
 function getFromLocalStorage(name){
     return JSON.parse(localStorage.getItem(name) || 'null')
 }
+// console.log(hash)
+
 // localStorage不封装，在这里单独写成下面的也是可以达到要求
     // var hashInlocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
     // // 取出 localStorage 中的 zzz 对应的 hash
     // if (hashInlocalStorage) {
     //     hash = hashInlocalStorage
+    //     console.log(hash)
     // }
+    // console.log(hash)
+
+
+
 
 //下面的是封装的函数，也就是函数封装前的初始化数据
 function init() {
@@ -81,9 +95,9 @@ function init() {
 // 删除下面的localstorage四行，单独在外面写出函数也是可以达到要求
     var hashInLocalStorage = getFromLocalStorage('zzz') 
     if(hashInLocalStorage){
-        hash = hashInLocalStorage
+        // hash = hashInLocalStorage  这里由于我把hh修改为了hash变量，导致封装前因为这里不需要调用可以满足要求，但是封装后无法满足要求，因为localstorage没有赋值给正确的hh
+        hh=hashInLocalStorage
     }
-
 
     return {
         'k': ks,  //这里是把ks的值放在'k'里面,ks就是init()函数里面前面的哈希数组ks,这里的'k'可以用k代替
