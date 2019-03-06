@@ -3,6 +3,14 @@
 //调用该封装函数的时候一般只需要把函数名字写出来，例如上面的只需要写xx（a）即可
 //如果是没有变量只有函数名字,例如function init(),调用就直接写函数名字即可
 //return 后面返回的值可以使单个值也可以是数组或者对象等哈希,例如可以return{'h':hh,'s':ss}
+//监听事件示例代码,选取对象.监听事件名称=function(变量){事件发生后执行的代码内容}
+        // 例如
+        // document.onkeypress = function (x) {
+        // var x = x['key']
+        // var website = hash[x]
+        // // location.href='http://'+website /当前网站打开/
+        // window.open('http://' + website, '_blank')  //在新窗口打开地址//
+    // }
 
 //封装函数的变量一般都是来自外部,比如下面的变量基本上都是和16行keys和17行hash相关。
 
