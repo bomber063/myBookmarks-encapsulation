@@ -4,6 +4,7 @@
 //如果是没有变量只有函数名字,例如function init(),调用就直接写函数名字即可
 //return 后面返回的值可以使单个值也可以是数组或者对象等哈希,例如可以return{'h':hh,'s':ss}
 
+//封装函数的变量一般都是来自外部,比如下面的变量基本上都是和16行keys和17行hash相关。
 
 
 //下面的意思
@@ -11,6 +12,7 @@
 //2、把hh返回给'h',然后通过init()['h']取到init()函数里面hh数组赋值给hash
 
 //下面的是函数封装后初始化数据 init()是没有变量的函数，直接使用函数名字即可
+// 第一步 初始化数据只有三行（16、17、18）
 var hashA = init()
 var keys = hashA['k']//['k']代表init()函数里面的reture的'k',这里的'k'不可以用k代替
 var hash = hashA['h']//['h']代表init()函数里面的reture的'h',这里的'h'不可以用h代替
@@ -31,9 +33,21 @@ function getFromLocalStorage(name){
     // console.log(hash)
 
 
+// 第三步 点击事件 监听用户动作 只有一行（37）
+listenToUser(hash)
+//点击事件封装函数
+function listenToUser(hash){
+    document.onkeypress = function (x) {
+        var x = x['key']
+        var website = hash[x]
+        // location.href='http://'+website /当前网站打开/
+        window.open('http://' + website, '_blank')  //在新窗口打开地址//
+    }
+}
 
 
-//下面的是封装的函数，也就是函数封装前的初始化数据
+
+//下面的是初始化封装的函数，也就是函数封装前的初始化数据
 function init() {
     var ks = {   //init()函数里面前面的哈希数组ks
         0: {
@@ -105,13 +119,11 @@ function init() {
     }
 
 }
-
-
-
 		// 生成键盘
         // 遍历 keys，生成 kbd 标签
+        //第二步 生成键盘 只有一行（125）
         generateKeyboard(keys,hash)
-
+        //下面是生成键盘的封装函数
         function generateKeyboard(keys,hash){
 
             index = 0;
@@ -122,44 +134,49 @@ function init() {
                 index2 = 0;
                 while (index2 < keys[index]['length']) {
                     
-                    span = document.createElement('span')
-                    span.textContent = keys[index][index2]
-                    span.className = 'text'
+                    // span = document.createElement('span')
+                    // span.textContent = keys[index][index2]
+                    // span.className = 'text'
+                    createSpan(keys[index][index2])//由于封装函数creatSpan，把上面三行写成下面这里一行即可
                     
-                    img = document.createElement('img')
-                    img.className = 'picture'
+                    // img = document.createElement('img')
+                    // img.className = 'picture'
                     
-                    if (hash[keys[index][index2]]) {
-                        img.src = 'http://' + hash[keys[index][index2]] + '/favicon.ico'
-                    }
-                    //因为有字母部分没有给出网址，所以也需要判断是否有网址//
-                    else {
-                        img.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
-                    }
-                    //可以查询onerror了解用法//
-                    img.onerror = function (e) {
-                        e.target.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
-                        return img
-                    }
-                    
-                    
+                    // if (hash[keys[index][index2]]) {
+                    //     img.src = 'http://' + hash[keys[index][index2]] + '/favicon.ico'
+                    // }
+                    // //因为有字母部分没有给出网址，所以也需要判断是否有网址//
+                    // else {
+                    //     img.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                    // }
+                    // //可以查询onerror了解用法//
+                    // img.onerror = function (e) {
+                    //     e.target.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                    //     return img
+                    // }
+                    createImg(hash[keys[index][index2]])//由于封装函数creatImg，把上面15行写成下面这里一行即可
+                                  
+                    // button = document.createElement('button')//创建button//
+                    // button.textContent = '编辑'//button上写字为e//
+                    // button.id = keys[index][index2]
+                    // button.onclick = function (xx) {
+                    //     var key = xx['target']['id']//把点击的元素的target的id赋值给key
+                    //     var wangzhi = prompt('给我一个网址')
+                    //     hash[key] = wangzhi//把你输入的网址（wangzhi）赋值给hash数组里面字母（key）对应的网址(value)
+                    //     var img2=xx['target'].previousSibling//把点击的元素也就是button前面的img元素赋值给img2
+                    //     img2.src = 'http://' + wangzhi + '/favicon.ico'//修改img2的网址,也就是修改点击前面的img元素的地址
+                    //     img2.onerror=function(xxx){
+                    //         xxx.target.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                    //         return img                            
+                    //     }
+                    //     localStorage.setItem('zzz', JSON.stringify(hash))//把改变的hash存到本地//
+                    //     //    xx.target=keys[index][index2]
+                    // }
+                    createButton(keys[index][index2])//由于封装函数creatButoon，把上面16行写成下面这里一行即可
+                   
                     kbd = document.createElement('kbd')//创建一个kbd//
                     // b.textContent(keys[index][index2])
                     // kbd.textContent=keys[index][index2];//kbd遍历//
-                    button = document.createElement('button')//创建button//
-                    button.textContent = '编辑'//button上写字为e//
-                    button.id = keys[index][index2]
-                    button.onclick = function (xx) {
-                        var key = xx['target']['id']//把点击的元素的target的id赋值给key
-                        var wangzhi = prompt('给我一个网址')
-                        hash[key] = wangzhi//把你输入的网址（wangzhi）赋值给hash数组里面字母（key）对应的网址(value)
-                        var img2=xx['target'].previousSibling//把点击的元素也就是button前面的img元素赋值给img2
-                        img2.src = 'http://' + wangzhi + '/favicon.ico'//修改img2的网址
-                        localStorage.setItem('zzz', JSON.stringify(hash))//把改变的hash存到本地//
-                        //    xx.target=keys[index][index2]
-                    }
-                   
-
                     kbd.appendChild(span)
                     kbd.appendChild(img)
                     kbd.appendChild(button)//把button放到kbd里面//
@@ -178,16 +195,62 @@ function init() {
             
 
 
-//点击事件
-listenToUser(hash)
-//点击事件封装函数
-function listenToUser(hash){
-    document.onkeypress = function (x) {
-        var x = x['key']
-        var website = hash[x]
-        // location.href='http://'+website /当前网站打开/
-        window.open('http://' + website, '_blank')  //在新窗口打开地址//
+
+
+//封装的创建span元素函数
+function createSpan(textContent){
+    span = document.createElement('span')
+    // span.textContent = keys[index][index2]
+    span.textContent = textContent
+    span.className = 'text'
+    return span
+}
+
+//封装的创建img元素函数
+function createImg(domain){
+    img = document.createElement('img')
+    img.className = 'picture'
+    // if (textContent) {
+    // if (hash[keys[index][index2]]) {
+       if (domain) {
+        // img.src = 'http://' + hash[keys[index][index2]] + '/favicon.ico'
+        img.src = 'http://' + domain + '/favicon.ico'
     }
+    //因为有字母部分没有给出网址，所以也需要判断是否有网址//
+    else {
+        img.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+    }
+    //可以查询onerror了解用法//
+    img.onerror = function (e) {
+        e.target.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+        // return img 这里写不写return img都不影响结果
+        }
+    return img
 }
     
+//封装的创建button元素函数
+function createButton(id){
+    button = document.createElement('button')//创建button//
+    button.textContent = '编辑'//button上写字为e//
+    // button.id = keys[index][index2]
+    button.id = id
+    button.onclick = function (xx) {
+        var key = xx['target']['id']//把点击的元素的target的id赋值给key
+        var wangzhi = prompt('给我一个网址')
+        hash[key] = wangzhi//把你输入的网址（wangzhi）赋值给hash数组里面字母（key）对应的网址(value)
+        var img2=xx['target'].previousSibling//把点击的元素也就是button前面的img元素赋值给img2
+        img2.src = 'http://' + wangzhi + '/favicon.ico'//修改img2的网址,也就是修改点击前面的img元素的地址
+        img2.onerror=function(xxx){
+            xxx.target.src = 'http:' + '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+            // return img  这里写不写return都不影响                          
+        }
+        localStorage.setItem('zzz', JSON.stringify(hash))//把改变的hash存到本地//
+        //    xx.target=keys[index][index2]
+    }
+    return button
+}
 
+
+// function tag(tagName){
+//     return document.createElement(tagName) 
+// }//方方老师还用了这个封装函数,但是个人觉得只有一行就没有封装了
