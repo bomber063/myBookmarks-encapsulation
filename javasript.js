@@ -97,11 +97,11 @@ function init() {
     }
 
     var hh = {    //init()函数里面前面的哈希对象hh
-        'q': 'qq.com',
+        'q': 'www.qq.com',
         'w': 'weibo.com',
         'e': 'ele.me',
         'r': 'renren.com',
-        't': 'tianya.com',
+        't': 'www.twitter.com',
         'y': 'youtube.com',
         'u': 'uc.com',
         'i': 'iqiyi.com',
@@ -110,7 +110,11 @@ function init() {
         'a': 'acfun.tv',
         's': 'sohu.com',
         'z': 'zhihu.com',
-        'm': 'www.mcdonalds.com.cn'    
+        'm': 'www.mcdonalds.com.cn',
+        'd':'www.douyu.com',
+        'h':'www.huya.com',
+        'g':'www.github.com',
+
     }
 
 
