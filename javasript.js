@@ -113,7 +113,9 @@ function init() {
         'm': 'www.mcdonalds.com.cn',
         'd':'www.douyu.com',
         'h':'www.huya.com',
-        'g':'www.github.com',
+        'g':'www.google.com',
+        'b':'www.baidu.com',
+        'f':'www.facebook.com',
 
     }
 
